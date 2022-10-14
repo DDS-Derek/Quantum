@@ -5,7 +5,7 @@ export PATH
 LANG=en_US.UTF-8
 
 
-if [ $Quantum_app=install ];then
+if [ $Quantum_app="install" ];then
 
     apt update -y
     apt-get update -y 
@@ -15,14 +15,14 @@ if [ $Quantum_app=install ];then
     perl -v
 
     if [ ! -f /quantum/bin/sendEmail ];then
-        wget http://caspian.dotconf.net/menu/Software/SendEmail/sendEmail-v1.56.tar.gz -P /quantum/tmp/sendEmail-v1.56.tar.gz
+        wget http://caspian.dotconf.net/menu/Software/SendEmail/sendEmail-v1.56.tar.gz -P /quantum/tmp
         tar -xzvf /quantum/tmp/sendEmail-v1.56.tar.gz -C /quantum/tmp
         cp -a /quantum/tmp/sendEmail-v1.56/sendEmail /quantum/bin
         chmod +x /quantum/bin/sendEmail
-    fi 
+    fi
 
 fi
 
-if [ $Quantum_app=update ];then
+if [ $Quantum_app="update" ];then
 
 fi

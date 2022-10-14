@@ -55,6 +55,6 @@ mv /quantum/tmp/Quantum-main/* /quantum/app
 rm -rf /quantum/tmp/main.zip
 rm -rf /quantum/tmp/Quantum-main
 
-Quantum_app=update
+Quantum_app="update"
 
 cd /quantum/app/install && bash ${OSNAME}.sh

@@ -51,10 +51,8 @@ wget -O /quantum/tmp/main.zip https://github.com/DDS-Derek/Quantum/archive/refs/
 unzip \
 	-d /quantum/tmp \
 	/quantum/tmp/main.zip
-mv /quantum/tmp/Quantum-main/* /quantum/app
+/usr/bin/cp -rf /quantum/tmp/Quantum-main/* /quantum/app
 rm -rf /quantum/tmp/main.zip
 rm -rf /quantum/tmp/Quantum-main
 
-Quantum_app="update"
-
-cd /quantum/app/install && bash ${OSNAME}.sh
+cd /quantum/app/install && bash update/${OSNAME}.sh

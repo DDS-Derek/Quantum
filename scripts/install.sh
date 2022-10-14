@@ -52,6 +52,7 @@ if [ $OSNAME != "macos" ];then
 	mkdir -p /quantum/tmp
 	mkdir -p /quantum/app
 	mkdir -p /quantum/bin
+	mkdir -p ${Quantum_Config_DIR}
 
 	if [ ! -f /quantum/app/LICENSE ];then
 
@@ -66,9 +67,9 @@ if [ $OSNAME != "macos" ];then
 		rm -rf /quantum/tmp/main.zip
 		rm -rf /quantum/tmp/Quantum-main
 
+		cp /quantum/app/config/config.sh ${Quantum_Config_DIR}/config.sh
+
 	fi
 fi
 
-Quantum_app=install
-
-cd /quantum/app/install && bash ${OSNAME}.sh
+cd /quantum/app/install && bash install/${OSNAME}.sh

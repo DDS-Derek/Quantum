@@ -57,9 +57,15 @@ if [ $OSNAME != "macos" ];then
 		wget -O /quantum/tmp/main.zip https://github.com/DDS-Derek/Quantum/archive/refs/heads/main.zip
 
 		unzip \
-			-d /quantum/app \
+			-d /quantum/tmp \
 			/quantum/tmp/main.zip
 
+		mv /quantum/tmp/Quantum-main/* /quantum/app
+
 		rm -rf /quantum/tmp/main.zip
+		rm -rf /quantum/tmp/Quantum-main
+
 	fi
 fi
+
+cd /quantum/app && bash ${OSNAME}.sh

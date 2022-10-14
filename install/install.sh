@@ -51,6 +51,7 @@ if [ $OSNAME != "macos" ];then
 	mkdir -p /quantum
 	mkdir -p /quantum/tmp
 	mkdir -p /quantum/app
+	mkdir -p /quantum/bin
 
 	if [ ! -f /quantum/app/LICENSE ];then
 

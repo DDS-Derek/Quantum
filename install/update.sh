@@ -47,27 +47,14 @@ fi
 
 echo "use system version: ${OSNAME}"
 
-if [ $OSNAME != "macos" ];then
-	mkdir -p /quantum
-	mkdir -p /quantum/tmp
-	mkdir -p /quantum/app
+wget -O /quantum/tmp/main.zip https://github.com/DDS-Derek/Quantum/archive/refs/heads/main.zip
+unzip \
+	-d /quantum/tmp \
+	/quantum/tmp/main.zip
+mv /quantum/tmp/Quantum-main/* /quantum/app
+rm -rf /quantum/tmp/main.zip
+rm -rf /quantum/tmp/Quantum-main
 
-	if [ ! -f /quantum/app/LICENSE ];then
-
-		wget -O /quantum/tmp/main.zip https://github.com/DDS-Derek/Quantum/archive/refs/heads/main.zip
-
-		unzip \
-			-d /quantum/tmp \
-			/quantum/tmp/main.zip
-
-		mv /quantum/tmp/Quantum-main/* /quantum/app
-
-		rm -rf /quantum/tmp/main.zip
-		rm -rf /quantum/tmp/Quantum-main
-
-	fi
-fi
-
-Quantum_app=install
+Quantum_app=update
 
 cd /quantum/app/install && bash ${OSNAME}.sh

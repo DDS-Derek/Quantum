@@ -183,7 +183,7 @@ case "$num" in
     *)
     clear
     echo -e "${Green}请输入正确数字 [1-5]${Font}"
-    config_1
+    main
     ;;
     esac
 }

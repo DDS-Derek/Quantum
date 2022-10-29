@@ -160,6 +160,11 @@ echo -e "${Green}4、ntoporcov/iQbit ${ntoporcov_iQbit_url}${Font}"
 echo -e "${Green}5、退出脚本${Font}"
 echo -e "———————————————————————————————————————"
 read -p "请输入数字 [1-5]:" num
+case "$num" in
+    5)
+    exit 1
+    ;;
+esac
 # 获取PUID PGID
 get_uid
 # 获取qb config 目录
@@ -177,15 +182,12 @@ case "$num" in
     4)
     ntoporcov_iQbit_install
     ;;
-    5)
-    exit 1
-    ;;
     *)
     clear
     echo -e "${Green}请输入正确数字 [1-5]${Font}"
     main
     ;;
-    esac
+esac
 }
 
 main

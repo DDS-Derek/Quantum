@@ -14,7 +14,7 @@ _os=`uname`
 echo -e "${Green}use system: ${_os}${Font}"
 if [ ${_os} == "Darwin" ]; then
 	OSNAME='macos'
-    echo -e "${Red}无法使用此脚本${Font}"
+    echo -e "${Red}错误：此系统无法使用此脚本${Font}"
     exit 1
 elif grep -Eq "openSUSE" /etc/*-release; then
 	OSNAME='opensuse'
@@ -46,7 +46,7 @@ elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
 	apt install -y wget zip unzip curl
 else
 	OSNAME='unknow'
-    echo -e "${Red}无法使用此脚本${Font}"
+    echo -e "${Red}错误：此系统无法使用此脚本${Font}"
     exit 1
 fi
 }
@@ -54,7 +54,7 @@ fi
 #root权限
 root_need(){
     if [[ $EUID -ne 0 ]]; then
-        echo -e "${Red}Error:This script must be run as root!${Font}"
+        echo -e "${Red}错误：此脚本必须以 root 身份运行！${Font}"
         exit 1
     fi
 }
@@ -80,14 +80,19 @@ get_qb_dir
 
 # WDaan/VueTorrent UI 安装
 WDaan_VueTorrent_install(){
+# 获取最新版本
 WDaan_VueTorrent_tag=$(wget --no-check-certificate -qO- https://api.github.com/repos/WDaan/VueTorrent/tags | grep 'name' | cut -d\" -f4 | head -1)
+# 下载
 wget \
     https://github.com/WDaan/VueTorrent/releases/download/${WDaan_VueTorrent_tag}/vuetorrent.zip \
     -O /tmp/vuetorrent.zip
+# 解压
 unzip \
     -d ${qb_config_dir} \
     /tmp/vuetorrent.zip > /dev/null
+# 删除安装文件
 rm -rf /tmp/vuetorrent.zip
+# 给权限
 chown -R ${qb_PUID}:${qb_PGID} ${qb_config_dir}/vuetorrent
 
 echo -e "${Green}WDaan/VueTorrent 安装成功${Font}"
@@ -98,15 +103,20 @@ echo -e "${Green}2.设置--Web UI--使用备用 Web UI的文件路径设置为 /
 
 # CzBiX/qb-web UI 安装
 CzBiX_qb_web_install(){
+# 获取最新版本
 CzBiX_qb_web_tag=$(wget --no-check-certificate -qO- https://api.github.com/repos/CzBiX/qb-web/tags | grep 'name' | cut -d\" -f4 | head -1)
+# 下载
 wget \
     https://github.com/CzBiX/qb-web/releases/download/${CzBiX_qb_web_tag}/qb-web-${CzBiX_qb_web_tag}.zip \
     -O /tmp/qb-web-${CzBiX_qb_web_tag}.zip
+# 解压
 unzip \
     -d ${qb_config_dir} \
     /tmp/qb-web-${CzBiX_qb_web_tag}.zip > /dev/null
 mv ${qb_config_dir}/dist ${qb_config_dir}/CzBiX_qb_web
+# 删除安装文件
 rm -rf /tmp/qb-web-${CzBiX_qb_web_tag}.zip
+# 给权限
 chown -R ${qb_PUID}:${qb_PGID} ${qb_config_dir}/CzBiX_qb_web
 
 echo -e "${Green}CzBiX/qb-web 安装成功${Font}"
@@ -117,15 +127,20 @@ echo -e "${Green}2.设置--Web UI--使用备用 Web UI的文件路径设置为 /
 
 # bill-ahmed/qbit-matUI UI 安装
 bill_ahmed_qbit_matUI_install(){
+# 获取最新版本
 bill_ahmed_qbit_matUI_tag=$(wget --no-check-certificate -qO- https://api.github.com/repos/bill-ahmed/qbit-matUI/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -c2-)
+# 下载
 wget \
     https://github.com/bill-ahmed/qbit-matUI/releases/download/v${bill_ahmed_qbit_matUI_tag}/qbit-matUI_Unix_${bill_ahmed_qbit_matUI_tag}.zip \
     -O /tmp/qbit-matUI_Unix_${bill_ahmed_qbit_matUI_tag}.zip
+# 解压
 unzip \
     -d ${qb_config_dir} \
     /tmp/qbit-matUI_Unix_${bill_ahmed_qbit_matUI_tag}.zip > /dev/null
 mv ${qb_config_dir}/qbit-matUI_Unix_${bill_ahmed_qbit_matUI_tag} ${qb_config_dir}/qbit_matUI
+# 删除安装文件
 rm -rf /tmp/qbit-matUI_Unix_${bill_ahmed_qbit_matUI_tag}.zip
+# 给权限
 chown -R ${qb_PUID}:${qb_PGID} ${qb_config_dir}/qbit_matUI
 
 echo -e "${Green}bill-ahmed/qbit-matUI 安装成功${Font}"
@@ -136,9 +151,12 @@ echo -e "${Green}2.设置--Web UI--使用备用 Web UI的文件路径设置为 /
 
 # ntoporcov/iQbit UI 安装
 ntoporcov_iQbit_install(){
+# 下载
 git clone https://github.com/ntoporcov/iQbit /tmp/iQbit
 mv /tmp/iQbit/release ${qb_config_dir}/iQbit
+# 删除安装文件
 rm -rf /tmp/iQbit
+# 给权限
 chown -R ${qb_PUID}:${qb_PGID} ${qb_config_dir}/iQbit
 
 echo -e "${Green}ntoporcov/iQbit 安装成功${Font}"
@@ -170,23 +188,32 @@ echo -e "———————————————————————�
 read -p "请输入数字 [1-5]:" num
 case "$num" in
     1)
+    # 获取所有数据
     get_all_ma
+    # 安装
     WDaan_VueTorrent_install
     ;;
     2)
+    # 获取所有数据
     get_all_ma
+    # 安装
     CzBiX_qb_web_install
     ;;
     3)
+    # 获取所有数据
     get_all_ma
+    # 安装
     bill_ahmed_qbit_matUI_install
     ;;
     4)
+    # 获取所有数据
     get_all_ma
+    # 安装
     ntoporcov_iQbit_install
     ;;
     5)
-    exit 1
+    # 退出
+    exit 0
     ;;
     *)
     clear

@@ -164,7 +164,7 @@ case "$num" in
     5)
     exit 1
     ;;
-esac
+    esac
 # 获取PUID PGID
 get_uid
 # 获取qb config 目录
@@ -187,7 +187,7 @@ case "$num" in
     echo -e "${Green}请输入正确数字 [1-5]${Font}"
     main
     ;;
-esac
+    esac
 }
 
 main

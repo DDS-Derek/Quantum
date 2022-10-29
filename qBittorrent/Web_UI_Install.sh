@@ -150,10 +150,6 @@ package_installation
 # 清理命令行
 clear
 echo -e "${Green}use os: ${OSNAME}${Font}"
-# 获取PUID PGID
-get_uid
-# 获取qb config 目录
-get_qb_dir
 # 输出主菜单
 echo -e "———————————————————————————————————————"
 echo -e "${Green}Linux qBittorrent Web UI 一键安装脚本${Font}"
@@ -164,6 +160,10 @@ echo -e "${Green}4、ntoporcov/iQbit ${ntoporcov_iQbit_url}${Font}"
 echo -e "${Green}5、退出脚本${Font}"
 echo -e "———————————————————————————————————————"
 read -p "请输入数字 [1-5]:" num
+# 获取PUID PGID
+get_uid
+# 获取qb config 目录
+get_qb_dir
 case "$num" in
     1)
     WDaan_VueTorrent_install

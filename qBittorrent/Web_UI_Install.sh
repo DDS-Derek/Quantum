@@ -70,6 +70,14 @@ get_qb_dir(){
 read -p "qBittorrent config 目录:" qb_config_dir
 }
 
+# 获取所有数据
+get_all_ma(){
+# 获取PUID PGID
+get_uid
+# 获取qb config 目录
+get_qb_dir
+}
+
 # WDaan/VueTorrent UI 安装
 WDaan_VueTorrent_install(){
 WDaan_VueTorrent_tag=$(wget --no-check-certificate -qO- https://api.github.com/repos/WDaan/VueTorrent/tags | grep 'name' | cut -d\" -f4 | head -1)
@@ -161,26 +169,24 @@ echo -e "${Green}5、退出脚本${Font}"
 echo -e "———————————————————————————————————————"
 read -p "请输入数字 [1-5]:" num
 case "$num" in
-    5)
-    exit 1
-    ;;
-    esac
-# 获取PUID PGID
-get_uid
-# 获取qb config 目录
-get_qb_dir
-case "$num" in
     1)
+    get_all_ma
     WDaan_VueTorrent_install
     ;;
     2)
+    get_all_ma
     CzBiX_qb_web_install
     ;;
     3)
+    get_all_ma
     bill_ahmed_qbit_matUI_install
     ;;
     4)
+    get_all_ma
     ntoporcov_iQbit_install
+    ;;
+    5)
+    exit 1
     ;;
     *)
     clear
